@@ -1,4 +1,7 @@
 <?php 
+require_once "connection.php";
+?>
+<?php 
 require_once "header.php";
 ?>
 <h1>welcome to bca ecommerce  contact page </h1>
