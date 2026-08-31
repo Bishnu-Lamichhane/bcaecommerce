@@ -1,52 +1,41 @@
-<?php 
-require_once "header.php";
-?>
-<?php 
-require_once "connection.php";
-?>
 <?php
+require_once "header.php";
+require_once "connection.php";
+
 if(!empty($_POST)){
-  $name = $_POST['name'];
-  $email = $_POST['email'];
-  $password = md5($_POST['password']);
-  $gender = $_POST['gender'];
-  $sql = "INSERT INTO users(name,email,password,gender) VALUES('$name','$email','$password','$gender' )";
-  $result = mysqli_query($conn,$sql);
-  if($result){
-    $_SESSION['success']="Account Created";
-    header("Location:register.php");
-  }else{
-    $_SESSION['error']="Account not created";
-    header("Location:register.php");
-  }
-
+    $name=$_POST['name'];
+    $email=$_POST['email'];
+    $password=md5($_POST['password']);
+    $gender=$_POST['gender'];
+    $sql="INSERT INTO users(name,email,password,gender)
+        VALUES('$name','$email','$password','$gender')";
+    $result=mysqli_query($conn,$sql);
+    if($result){
+        $_SESSION['success']="Account created";
+        header("Location:register.php");
+    }else{
+        $_SESSION['error']= "Account not created";
+        header("Location:register.php");
+    }
 }
- ?>
-<h1>welcome to bca ecommerce  register page </h1>
 
- <form action="" method="post">
-  <form action="register.php" method="post">
-    name:<br>
-    <input type="text" name="name" ><br>
-    
-     email:<br>
-    <input type="email" name="email" ><br>
+?>
 
-    password:<br>
-    <input type="password" name="password" ><br>
+<h1>register </h1>
 
-
-    gender:<br>
-    <input type="radio" name="gender" value="male">Male
-    <input type="radio" name="gender" value="female">Female
-    <input type="radio" name="gender" value="others">Others
-    <button>Create New account</button><br>
-
-    <!-- <button name="addUser">Add Users</button><br> -->
-
-
+<form action="" method="post">
+    Name: <input type="text" name="name" required> <br><br>
+    Email: <input type="email" name="email" required> <br><br>
+    Password: <input type="password" name="password" required> <br><br>
+    Gender: <select name="gender" required>
+            <option value="">----Select Gender ----</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="others">Others</option>
+            </select> <br><br>
+    <button>Create new account</button>
 </form>
 <?php 
-require_once "footer.php";  
-?>
+require_once "footer.php";
 
+?>
