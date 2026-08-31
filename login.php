@@ -1,36 +1,30 @@
-<?php 
+<?php
 require_once "header.php";
+require_once "connection.php";
+
+if(!empty($_POST)){
+    $email=$_POST['email'];
+    $password=md5($_POST['password']);
+    $sql="SELECT * FROM users WHERE email='$email' AND password='$password'";
+    $result=mysqli_query($conn,$sql);
+    if(mysqli_num_rows($result)>0){
+        $user=mysqli_fetch_assoc($result);
+        $_SESSION['success']="Login successful";
+        $_SESSION['auth']=$user;
+        header("Location:index.php");
+    }else{
+        $_SESSION['error']= "Invalid credentials";
+        header("Location:login.php");
+    }
+}
 ?>
-<h1>welcome to bca ecommerce  login page </h1>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <form action="#">
-  <form action="register.php" method="post">
-    name:
-    <input type="text" name="name" >
-
-    gender:
-    <input type="radio" name="gender" value="male">Male
-    <input type="radio" name="gender" value="female">Female
-    <input type="radio" name="gender" value="others">Others
-
-    gmail:
-    <input type="email" name="email" >
-
-    password:
-    <input type="password" name="password" >
-
-    <button name="addUser">Add Users</button>
-
+<h1>Login </h1>
+<form action="" method="post">
+    Email: <input type="email" name="email" required> <br><br>
+    Password: <input type="password" name="password" required> <br><br>
+    <button>Login</button>
 </form>
-</body>
-</html>
 <?php 
 require_once "footer.php";
- ?>
+
+?>
