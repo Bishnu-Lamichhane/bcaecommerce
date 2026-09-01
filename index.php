@@ -8,7 +8,7 @@ $result = mysqli_query($conn,$sql);
 <?php foreach($result as $product ){ ?>
   <h1><?php echo $product['title'] ?> </h1>
   <img src="images/<?php echo $product['image'] ?>" width="200" height="200" />
-  <a href="">view product</a>
+  <a href="product_details.php?slug=<?php echo $product['slug']?>">view product</a>
 <?php }?>
 
 <?php 
